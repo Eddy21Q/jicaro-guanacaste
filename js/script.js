@@ -38,7 +38,7 @@ const diapositivas = [
  {titulo:'Yadira Hernández',contenido:`<div class="columnas"><div><p class="subtitulo">Jícaros de la Pampa</p>${lista(['Colorado, Liberia.','Más de 13 años dedicada a la actividad.','Aprendizaje principalmente autodidacta.','Capacitación complementaria con una persona experta.'])}</div>${fotografia(imagenes.yadira[0],'Artesanías de Yadira Hernández')}</div>`},
  {titulo:'Experiencia de Yadira',contenido:`<div class="dos">${tarjeta('Del fruto a la pieza',lista(['Selecciona el fruto verde y de tamaño adecuado.','Hierve el jícaro y retira la pulpa.','Trabaja con taladro, navajas, cutter y cautín.','Una pieza pequeña puede tomar de un día a una semana.']))}${tarjeta('Un saber que necesita continuidad',lista(['Reconoce el oficio como un saber poco conocido.','Percibe poco interés de las nuevas generaciones.','Propone impulsar la tradición desde espacios educativos y municipales.']))}</div>`},
  {titulo:'Artesanías de Yadira',clase:'galeria-slide',contenido:`<div class="galeria tres">${imagenes.yadira.map((img,i)=>fotografia(img,['Motivos de lapa roja y orquídea','Chorreador de café','Canasta con mariposa monarca'][i])).join('')}</div><p class="pie">Selecciona una fotografía para ampliarla.</p>`},
- {titulo:'Rosaura Bustos Rodríguez',contenido:`<div class="columnas"><div><p class="subtitulo">Creaciones Artesanales Rous</p>${lista(['Barrio Moracia, Liberia.','Comenzó observando a su hermana.','Formación y asistencia técnica relacionada con el INA.','Mayor dedicación desde 2011; capacitación formal desde 2013.','Reconocimiento del Centro de Patrimonio Cultural en jícaro y calabaza.','Sello Cultural y Artesanal del MEIC en algunos productos.'])}<button id="escuchar-audio" data-dialogo="audio-dialogo" disabled>Escuchar registro de audio</button></div>${fotografia(imagenes.rosaura[0],'Colección de Creaciones Artesanales Rous')}</div>`},
+ {titulo:'Rosaura Bustos Rodríguez',contenido:`<div class="columnas"><div><p class="subtitulo">Creaciones Artesanales Rous</p>${lista(['Barrio Moracia, Liberia.','Comenzó observando a su hermana.','Formación y asistencia técnica relacionada con el INA.','Mayor dedicación desde 2011; capacitación formal desde 2013.','Reconocimiento del Centro de Patrimonio Cultural en jícaro y calabaza.','Sello Cultural y Artesanal del MEIC en algunos productos.'])}<button id="escuchar-audio" data-dialogo="audio-dialogo">Escuchar registro de audio</button></div>${fotografia(imagenes.rosaura[0],'Colección de Creaciones Artesanales Rous')}</div>`},
  {titulo:'Técnicas y productos de Rosaura',contenido:`<div class="dos">${tarjeta('Técnicas mencionadas',lista(['Labrado y calado.','Esgrafiado.','Sofleteado y sobrado.'])+fotografia(imagenes.rosaura[1],'Motivos precolombinos'))}${tarjeta('Productos',lista(['Joyería, guacales y chorreadores.','Maracas, faroles y máscaras.','Llaveros y piezas decorativas.'])+fotografia(imagenes.rosaura[2],'Jícaro, semillas y materiales naturales'))}</div><p class="pie">Se presentan los nombres de las técnicas registrados en el trabajo de campo, sin añadir definiciones.</p>`},
  {titulo:'Artesanías de Rosaura',clase:'galeria-slide',contenido:`<div class="galeria tres">${imagenes.rosaura.map((img,i)=>fotografia(img,['Colección general','Serpiente emplumada y jaguar chorotega','Joyería de jícaro, semillas y materiales naturales'][i])).join('')}</div><p class="pie">Varias piezas aparecen reunidas en las fotografías originales. Selecciona una imagen para ampliarla.</p>`},
  {titulo:'Lo que descubrimos',contenido:`<div class="hallazgos">${[['Aprendizaje','Autodidacta, observación y capacitación.'],['Preparación','Selección, extracción de pulpa, limpieza interna y secado cuidadoso.'],['Herramientas','Navajas, cutters, agujas artesanales, taladro, cautín y mototool.'],['Técnicas','Labrado, calado, esgrafiado, sofleteado, sobrado, pintura y decoración.'],['Productos','Joyería, guacales, chorreadores, vajillas, maracas, faroles, máscaras, llaveros y canastas.']].map(([t,p])=>tarjeta(t,`<p>${p}</p>`)).join('')}</div><p class="pie">Respuestas resumidas por el grupo; no son citas textuales.</p>`},
@@ -72,8 +72,17 @@ document.addEventListener('click',event=>{
 });
 document.querySelectorAll('dialog').forEach(dialogo=>dialogo.addEventListener('click',event=>{if(event.target!==dialogo)return;const r=dialogo.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialogo.close();}));
 const audio=document.querySelector('#audio-rosaura');const botonAudio=document.querySelector('#escuchar-audio');
-audio.addEventListener('loadedmetadata',()=>{botonAudio.disabled=false;document.querySelector('#audio-estado').textContent='Audio disponible. Pulsa reproducir para escuchar.';});
-function audioError(){botonAudio.disabled=true;document.querySelector('#audio-estado').textContent='El registro no está disponible o el navegador no admite su formato.';}
+function audioDisponible(){botonAudio.disabled=false;document.querySelector('#audio-estado').textContent='Audio disponible. Pulsa reproducir para escuchar.';}
+audio.addEventListener('loadedmetadata',audioDisponible);
+// Los metadatos pueden llegar antes de registrar el evento, o al abrir el diálogo.
+if(audio.readyState>=1)audioDisponible();
+botonAudio.addEventListener('click',()=>{if(audio.readyState===0)audio.load();});
+function audioError(){document.querySelector('#audio-estado').textContent='El navegador no pudo reproducir el registro. Utiliza el enlace para abrir o descargar el audio.';}
+if(location.protocol==='https:'||location.protocol==='http:'){
+ fetch('assets/audio/entrevista-rosaura.mp4',{method:'HEAD'}).then(respuesta=>{
+  if(respuesta.status===404||respuesta.status===410){botonAudio.disabled=true;document.querySelector('#audio-estado').textContent='El archivo de audio no está disponible.';}
+ }).catch(()=>{ /* Mantener disponible el enlace alternativo si falla la comprobación. */ });
+}
 audio.addEventListener('error',audioError);audio.querySelector('source').addEventListener('error',audioError);
 document.querySelector('#audio-dialogo').addEventListener('close',()=>audio.pause());
 const secciones=[...document.querySelectorAll('.diapositiva')];
@@ -131,4 +140,5 @@ let toque=null;
 presentacion.addEventListener('touchstart',event=>{if(event.touches.length===1&&!event.target.closest('button,a,audio'))toque={x:event.touches[0].clientX,y:event.touches[0].clientY};else toque=null;},{passive:true});
 presentacion.addEventListener('touchend',event=>{if(!toque||dialogoAbierto())return;const dx=event.changedTouches[0].clientX-toque.x,dy=event.changedTouches[0].clientY-toque.y;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.5)mostrar(actual+(dx<0?1:-1));toque=null;},{passive:true});
 window.addEventListener('hashchange',desdeHash);window.addEventListener('resize',ajustar);new ResizeObserver(ajustar).observe(presentacion);desdeHash();
+
 
