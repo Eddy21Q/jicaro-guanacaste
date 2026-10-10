@@ -1,5 +1,3 @@
-# Conversaciones privadas: conservar solo en el equipo local.
-assets/images/evidencia-*.png
 .codex/
 .agents/
 .aws/

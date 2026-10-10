@@ -10,6 +10,6 @@ Repositorio: https://github.com/Eddy21Q/jicaro-guanacaste
 
 Publicación desde la rama `main`, carpeta raíz. No requiere dependencias ni compilación.
 
-Las capturas privadas de WhatsApp se excluyen del repositorio y de la presentación pública. Permanecen disponibles al abrir la página localmente o en localhost. Fotografías, nombres y audio requieren autorización de las participantes para su uso público.
+La presentación incluye fotografías, cuatro capturas de WhatsApp y el registro de audio. El grupo confirmó que cuenta con consentimiento informado de las participantes para utilizar este material en la presentación académica.
 
 Los archivos multimedia se ubican en `assets/images/` y `assets/audio/`.

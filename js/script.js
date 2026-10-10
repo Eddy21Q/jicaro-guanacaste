@@ -1,5 +1,4 @@
 ﻿'use strict';
-const evidenciasLocales = location.protocol === 'file:' || ['localhost','127.0.0.1','::1'].includes(location.hostname);
 const integrantes = ['Noemy Yudith Bermúdez Guadamuz','Juan Carlos Jiménez Castrillo','Eddy Josué González Quirós','Luis Carlos Gutiérrez Picado'];
 const imagenes = {
  portada: {src:'assets/images/portada-jicaro.png',titulo:'El jícaro: material de la tradición artesanal'},
@@ -54,11 +53,7 @@ const diapositivas = [
 const presentacion = document.querySelector('#presentacion');
 presentacion.innerHTML = diapositivas.map((slide,i)=>`<section class="diapositiva ${slide.clase||''}" id="diapositiva-${i+1}" aria-labelledby="titulo-${i+1}" ${i?'hidden':''}><div class="lienzo"><p class="etiqueta cabecera-slide">Patrimonio cultural · ${String(i+1).padStart(2,'0')}</p>${i?`<h2 id="titulo-${i+1}">${slide.titulo}</h2>`:''}<div class="contenido">${slide.contenido}</div></div></section>`).join('');
 document.querySelector('.portada h1').id = 'titulo-1';
-if (evidenciasLocales) {
- document.querySelector('#lista-evidencias').innerHTML = imagenes.contactos.map(img=>fotografia(img)).join('');
-} else {
- document.querySelector('[data-dialogo="evidencias"]').hidden = true;
-}
+document.querySelector('#lista-evidencias').innerHTML = imagenes.contactos.map(img=>fotografia(img)).join('');
 document.querySelector('#guion-completo').innerHTML = guion.map(([t,p],i)=>tarjeta(`0${i+1} · ${t}`,`<p>${p}</p>`)).join('');
 fuentes.forEach(fuente=>{const p=document.createElement('p');p.className='fuente';const a=document.createElement('a');a.href=fuente.url;a.textContent=fuente.titulo;a.target='_blank';a.rel='noopener noreferrer';p.append(a);document.querySelector('#fuentes').append(p);});
 function prepararImagen(img) {
