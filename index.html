@@ -1,0 +1,21 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El legado artesanal del jícaro · Presentación</title>
+<link rel="stylesheet" href="css/styles.css"><script src="js/script.js" defer></script>
+</head>
+<body>
+<main id="presentacion" aria-label="Presentación del segundo avance"></main>
+<footer class="controles">
+<div class="herramientas"><button id="inicio" title="Volver a la portada">⌂ Portada</button><button id="abrir-menu" aria-haspopup="dialog">☷ Diapositivas</button><button id="pantalla-completa">⛶ Pantalla completa</button></div>
+<div class="avance"><button id="anterior" aria-label="Diapositiva anterior">← Anterior</button><span id="contador" role="status" aria-live="polite"></span><button id="siguiente" aria-label="Diapositiva siguiente">Siguiente →</button></div>
+<progress id="progreso" max="17" value="1" aria-label="Progreso de la presentación"></progress>
+</footer>
+<dialog id="menu"><div class="dialogo-cabecera"><h2>Diapositivas</h2><button data-cerrar="menu" aria-label="Cerrar menú">Cerrar ×</button></div><nav id="lista-diapositivas" aria-label="Ir a una diapositiva"></nav></dialog>
+<dialog id="foto"><div class="dialogo-cabecera"><span>Galería de campo</span><button data-cerrar="foto" aria-label="Cerrar fotografía">Cerrar ×</button></div><div id="foto-contenido"></div></dialog>
+<dialog id="evidencias"><div class="dialogo-cabecera"><h2>Evidencias de contacto</h2><button data-cerrar="evidencias">Cerrar ×</button></div><p class="secundario">Las capturas deben ocultar teléfonos, direcciones, mapas y otros datos privados antes de su presentación pública.</p><div id="lista-evidencias" class="galeria"></div></dialog>
+<dialog id="audio-dialogo"><div class="dialogo-cabecera"><h2>Conversación con Rosaura</h2><button data-cerrar="audio-dialogo">Cerrar ×</button></div><p>Registro de audio del acercamiento con Rosaura Bustos Rodríguez, utilizado como evidencia del trabajo de campo.</p><audio id="audio-rosaura" controls preload="metadata"><source src="assets/audio/entrevista-rosaura.mp4" type="audio/mp4"></audio><p id="audio-estado" role="status">Pulsa reproducir para escuchar.</p><p><a href="assets/audio/entrevista-rosaura.mp4" target="_blank" rel="noopener">Abrir audio</a> · <a href="assets/audio/entrevista-rosaura.mp4" download>Descargar audio</a></p><p class="nota">El uso público del audio, las imágenes y los testimonios depende de la autorización de la persona participante.</p></dialog>
+<dialog id="guion-detalle"><div class="dialogo-cabecera"><h2>Guion preliminar</h2><button data-cerrar="guion-detalle">Cerrar ×</button></div><div id="guion-completo"></div></dialog>
+<noscript>Activa JavaScript para iniciar esta presentación.</noscript>
+</body></html>
