@@ -34,3 +34,20 @@ a{color:var(--color-dorado);text-underline-offset:4px}button{font:inherit;cursor
   .secuencia article { min-height:210px; }
 }
 @media print { .lienzo { display:flex; flex-direction:column; justify-content:center; } }
+
+.campo-slide .linea-tiempo { margin:18px 0 24px; gap:18px; }
+.campo-slide .linea-tiempo article { padding:15px 0 0; }
+.campo-slide .fecha-campo { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+.campo-slide .fecha-campo strong { font-size:42px; margin:0; }
+.campo-slide .fecha-campo span { font-size:13px; margin:0; max-width:9ch; }
+.campo-slide .linea-tiempo h3 { font-size:22px; min-height:52px; margin-bottom:14px; }
+.campo-slide .abrir-foto { height:220px; }
+.campo-slide figcaption { display:none; }
+@media(max-width:700px) {
+ .campo-slide .linea-tiempo { gap:18px; }
+ .campo-slide .linea-tiempo h3 { font-size:18px; min-height:43px; }
+ .campo-slide .abrir-foto { height:170px; }
+ .campo-slide .fecha-campo { gap:9px; }
+ .campo-slide .fecha-campo strong { font-size:34px; }
+ .campo-slide .fecha-campo span { font-size:11px; }
+}
