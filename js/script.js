@@ -12,7 +12,7 @@ const imagenes = [
 
 // Incorporar solo un enlace confirmado al documental propio, con autorización.
 // Ejemplo de formato: https://www.youtube.com/watch?v=IDENTIFICADOR_REAL
-const documental = {url:null,titulo:'El legado artesanal del jícaro en Liberia, Guanacaste'};
+const documental = {url:'https://youtu.be/F47q6cK_bmA',titulo:'El legado artesanal del jícaro en Liberia, Guanacaste'};
 
 const galeria=document.querySelector('#galeria-fotos');
 const filtros=[...document.querySelectorAll('[data-filtro]')];
@@ -107,7 +107,7 @@ function obtenerIdYoutube(url){
 const idVideo=documental.url?obtenerIdYoutube(documental.url):null;
 if(idVideo){
   const contenedor=document.querySelector('#video-documental');
-  const boton=document.createElement('button');boton.className='boton';boton.type='button';boton.textContent='Cargar documental de YouTube ↗';
+  const boton=document.createElement('button');boton.className='boton';boton.type='button';boton.textContent='Ver documental aquí ▶';
   boton.addEventListener('click',()=>{const iframe=document.createElement('iframe');iframe.className='video-marco';iframe.title=documental.titulo;iframe.src=`https://www.youtube-nocookie.com/embed/${idVideo}`;iframe.allow='fullscreen; picture-in-picture';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';contenedor.replaceChildren(iframe);});
   contenedor.replaceChildren(boton);
 }
