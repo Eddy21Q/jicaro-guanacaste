@@ -3,3 +3,5 @@
 .aws/
 Thumbs.db
 .DS_Store
+.local-only/
+.local-tools/
