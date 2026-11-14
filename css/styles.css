@@ -131,3 +131,19 @@ nav a { min-height:40px; display:flex; align-items:center; }
 .enlace-video { display:flex; justify-content:space-between; align-items:center; gap:25px; margin:20px 0 0; color:var(--secundario); font-size:14px; }
 .enlace-video .enlace { flex-shrink:0; }
 @media(max-width:900px) { .enlace-video { align-items:flex-start; flex-direction:column; gap:12px; } }
+
+/* El acceso a ampliar imágenes debe ser visible también sin hover. */
+.ampliar-foto>span {
+ background:#e2a577;
+ color:#241a13;
+ border:1px solid #f0c49f;
+ border-radius:3px;
+ padding:7px 12px;
+ font-weight:600;
+ line-height:1.5;
+ box-shadow:0 2px 8px #241a1330;
+}
+.ampliar-foto:hover>span,.ampliar-foto:focus-visible>span {
+ background:#f0c49f;
+ color:#241a13;
+}
