@@ -96,10 +96,6 @@ if('IntersectionObserver' in window){
 // Compatibilidad con enlaces compartidos de la antigua presentación.
 if(/^#diapositiva-\d+$/.test(location.hash)){history.replaceState(null,'',`${location.pathname}${location.search}#inicio`);}
 
-const audio=document.querySelector('#audio-rosaura');
-function errorAudio(){document.querySelector('#audio-estado').textContent='El navegador no pudo reproducir el audio. Puedes abrirlo con el enlace alternativo.';}
-audio.addEventListener('error',errorAudio);audio.querySelector('source').addEventListener('error',errorAudio);
-audio.addEventListener('loadedmetadata',()=>{document.querySelector('#audio-estado').textContent='Registro disponible. Pulsa reproducir para escuchar.';});
 
 function obtenerIdYoutube(url){
   try{const u=new URL(url);let id;if(['youtube.com','www.youtube.com'].includes(u.hostname))id=u.searchParams.get('v');else if(u.hostname==='youtu.be')id=u.pathname.slice(1);return /^[A-Za-z0-9_-]{11}$/.test(id||'')?id:null;}catch{return null;}
@@ -107,8 +103,9 @@ function obtenerIdYoutube(url){
 const idVideo=documental.url?obtenerIdYoutube(documental.url):null;
 if(idVideo){
   const contenedor=document.querySelector('#video-documental');
-  const boton=document.createElement('button');boton.className='boton';boton.type='button';boton.textContent='Ver documental aquí ▶';
-  boton.addEventListener('click',()=>{const iframe=document.createElement('iframe');iframe.className='video-marco';iframe.title=documental.titulo;iframe.src=`https://www.youtube-nocookie.com/embed/${idVideo}`;iframe.allow='fullscreen; picture-in-picture';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';contenedor.replaceChildren(iframe);});
-  contenedor.replaceChildren(boton);
+  const iframe=document.createElement('iframe');iframe.className='video-marco';iframe.title=documental.titulo;
+  iframe.src=`https://www.youtube-nocookie.com/embed/${idVideo}`;iframe.loading='lazy';
+  iframe.allow='fullscreen; picture-in-picture';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';
+  contenedor.replaceChildren(iframe);
 }
 

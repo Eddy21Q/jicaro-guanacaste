@@ -125,3 +125,9 @@ nav a { min-height:40px; display:flex; align-items:center; }
 .proceso,.documental,.sello,#visor,.pie .marca { color:var(--tinta); }
 .documental-marca span,.visor-barra button,.visor-imagen button,.imagen-fallida { color:var(--tinta); }
 ::selection { background:#c97542; color:#1e1510; }
+
+.documental-grande { width:100%; background:var(--cafe-profundo); border:1px solid var(--borde); border-radius:8px; overflow:hidden; scroll-margin-top:105px; }
+.documental-grande .video-marco { display:block; width:100%; aspect-ratio:16/9; height:auto; margin:0; border:0; }
+.enlace-video { display:flex; justify-content:space-between; align-items:center; gap:25px; margin:20px 0 0; color:var(--secundario); font-size:14px; }
+.enlace-video .enlace { flex-shrink:0; }
+@media(max-width:900px) { .enlace-video { align-items:flex-start; flex-direction:column; gap:12px; } }
